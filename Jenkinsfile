@@ -27,6 +27,12 @@ pipeline{
             }
         }
 
+        stage("Docker Password"){
+            steps{
+                sh "12345678"
+            }
+        }
+
         stage("Docker Run"){
             steps{
                 sh "sudo -S docker run --name my-gojenkins -p ${port} ${modName}"
