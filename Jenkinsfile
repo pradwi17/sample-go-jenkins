@@ -23,13 +23,13 @@ pipeline{
 
         stage("Docker Build"){
             steps{
-                sh "docker build -t ${modName} ."
+                sh "sudo docker build -t ${modName} ."
             }
         }
 
         stage("Docker Run"){
             steps{
-                sh "docker run --name my-gojenkins -p ${port} ${modName}"
+                sh "sudo docker run --name my-gojenkins -p ${port} ${modName}"
             }
         }                   
     }
