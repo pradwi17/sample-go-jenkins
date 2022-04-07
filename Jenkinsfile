@@ -4,6 +4,8 @@ pipeline{
         root = "/usr/local/go/bin/go"
         branch = "master"
         scmUrl = "https://github.com/pradwi17/sample-go-jenkins.git"
+        modName = "sample-go-jenkins"
+        port = "8082:8082"
     }
 
     stages{
@@ -18,15 +20,16 @@ pipeline{
                 git branch: "${branch}", url: "${scmUrl}"
             }
         }
-        stage("Go Test"){
+
+        stage("Docker Build"){
             steps{
-                sh "${root} test ./... -cover"
+                sh "docker build -t ${modName} ."
             }
         }
 
-        stage("Go Build"){
+        stage("Docker Run"){
             steps{
-                sh "${root} build ./..."
+                sh "docker run --name my-gojenkins -p ${port} ${modName}"
             }
         }                   
     }
