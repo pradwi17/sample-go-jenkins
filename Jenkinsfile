@@ -23,19 +23,13 @@ pipeline{
 
         stage("Docker Build"){
             steps{
-                sh "sudo -S docker build -t ${modName} ."
-            }
-        }
-
-        stage("Docker Password"){
-            steps{
-                sh "12345678"
+                sh "sudo docker build -t ${modName} ."
             }
         }
 
         stage("Docker Run"){
             steps{
-                sh "sudo -S docker run --name my-gojenkins -p ${port} ${modName}"
+                sh "sudo docker run --name my-gojenkins -p ${port} ${modName}"
             }
         }                   
     }
